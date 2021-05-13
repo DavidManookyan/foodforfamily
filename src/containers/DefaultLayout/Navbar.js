@@ -17,6 +17,9 @@ export const Template = (props) => {
   const mobileNav = useDisclosure()
   return (
     <Flex
+        zIndex="1000"
+        position="absolute"
+        top="0"
         width="100%"
         height="80px"
       py={4}

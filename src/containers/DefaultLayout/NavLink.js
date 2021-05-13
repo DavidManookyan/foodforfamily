@@ -1,10 +1,13 @@
 import { Link, useColorModeValue as mode } from '@chakra-ui/react'
+import { Link as ReactLink } from 'react-router-dom'
 import * as React from 'react'
 
 export const NavLink = (props) => {
-  const { isActive, ...rest } = props
+  const { isActive, to, ...rest } = props
   return (
     <Link
+      to={to}
+      as={ReactLink}
       display="block"
       py={2}
       px={3}

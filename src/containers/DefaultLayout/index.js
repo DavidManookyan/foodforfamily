@@ -5,12 +5,13 @@ import {
     Text,
     Flex,
     Center,
-    useColorModeValue as mode
+    useColorModeValue as mode,
+    Image
 } from '@chakra-ui/react'
-import { Link, useLocation } from 'react-router-dom'
-import { Logo } from './Logo'
+import { useLocation } from 'react-router-dom'
 import { Navbar } from './Navbar'
 import { NavLink } from './NavLink'
+import { Footer } from '../../components/Footer'
 // import { UserProfile } from './UserProfile'
 
 const DefaultLayout = ({ children }) => {
@@ -18,21 +19,39 @@ const DefaultLayout = ({ children }) => {
     const location = useLocation()
     return (
         <Flex
+            flexDirection="column"
             bg={{ md: mode('gray.100', 'inherit') }}
-            p="6"
             minH="100vh"
             width="100%"
             position="relative">
             <Navbar>
                 <Navbar.Brand>
                     <Center marginEnd="10">
-                        <Logo h="6" iconColor={mode('blue.600', 'blue.300')} />
+                        <Image
+                            objectFit="cover"
+                            height="60px"
+                            width="60px"
+                            src={mode("/blackLogo.png", "/whiteLogo.png")}
+                            alt="logo"/>
+                        {/* <Logo h="6" iconColor={mode('blue.600', 'blue.300')} /> */}
                     </Center>
                 </Navbar.Brand>
                 <Navbar.Links>
-                    <NavLink isActive={location.pathname === '/'}><Link to="/">Home</Link></NavLink>
-                    <NavLink>Features</NavLink>
-                    <NavLink>Documentation</NavLink>
+                    <NavLink
+                        to="/"
+                        isActive={location.pathname === '/'}>
+                        Home
+                    </NavLink>
+                    <NavLink
+                        to="/menu"
+                        isActive={location.pathname === '/menu'}>
+                        Menu
+                    </NavLink>
+                    <NavLink
+                        to="/contact-us"
+                        isActive={location.pathname === '/contact-us'}>
+                        Contact Us
+                    </NavLink>
                     <NavLink>Pricing</NavLink>
                 </Navbar.Links>
                 <Navbar.UserProfile>
@@ -52,6 +71,7 @@ const DefaultLayout = ({ children }) => {
                 </Navbar.UserProfile>
             </Navbar>
             {children}
+            <Footer/>
         </Flex>
     )
 }
